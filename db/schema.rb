@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_11_161726) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_11_164954) do
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "account_number"
     t.bigint "supplier_id", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_11_161726) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cpf"
   end
 
   create_table "books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
