@@ -29,6 +29,9 @@ gem "jbuilder"
 # Validator to CPF and CNPJ
 gem 'cpf_cnpj', '~> 0.2.1'
 
+# Validator to ISBN
+gem 'isbn', '~> 2.0', '>= 2.0.11'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
