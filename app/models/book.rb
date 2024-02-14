@@ -2,7 +2,7 @@ class Book < ApplicationRecord
   belongs_to :author
   has_and_belongs_to_many :assemblies
 
-  validates :name, presence: true
+  validates :title, presence: true
   validate :isbn, :isbn_valid
 
   private
