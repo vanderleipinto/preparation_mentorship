@@ -1,10 +1,12 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: %i[ show edit update destroy ]
+  before_action :set_supplier, only: %i[ report show edit update destroy ]
 
   # GET /suppliers or /suppliers.json
   def index
     if params[:search_supplier].present?
-      @suppliers = Supplier.where("name LIKE ?","%#{params[:search_supplier]}%")    
+      @suppliers = Supplier.where("name LIKE ?","%#{params[:search_supplier]}%")
+    elsif params[:search_author].present?
+      @suppliers = Supplier.joins(parts: { assemblies: { books: :author } }).where(authors: { id: params[:search_author] }).distinct
     else
       @suppliers = Supplier.all
     end
@@ -21,6 +23,10 @@ class SuppliersController < ApplicationController
 
   # GET /suppliers/1/edit
   def edit
+  end
+
+  # GET /suppliers/1/report
+  def report  
   end
 
   # POST /suppliers or /suppliers.json
@@ -53,7 +59,7 @@ class SuppliersController < ApplicationController
 
   # DELETE /suppliers/1 or /suppliers/1.json
   def destroy
-    @supplier.destroy!
+    @supplier.destroy! 
 
     respond_to do |format|
       format.html { redirect_to suppliers_url, notice: "Supplier was successfully destroyed." }
@@ -65,6 +71,7 @@ class SuppliersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_supplier
       @supplier = Supplier.find(params[:id])
+      @books = Book.joins(assemblies: :parts).where(parts: { supplier_id: @supplier.id }).distinct
     end
 
     # Only allow a list of trusted parameters through.
