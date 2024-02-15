@@ -7,4 +7,13 @@
     <% end %>
 </div> 
 
+<div>
+  <%= form_tag(suppliers_path, method: :get) do %>    
+    
+    <label for="search_author">Author:</label>    
+
+    <%= select_tag(:search_author, options_for_select(Author.pluck(:name, :id)), prompt: "Choose an Author") %>
+
+    <%= submit_tag("Search Author's Supplier(s)") %>
+    <% end %>
 </div> 
