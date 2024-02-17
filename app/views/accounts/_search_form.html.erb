@@ -1,0 +1,8 @@
+<div>
+  <%= form_tag(accounts_path, method: :get) do %>
+    <label for="search_number">Number:</label>
+    <%= text_field_tag(:search_number) %> 
+
+    <%= submit_tag("Search Supplier") %>
+  <% end %>
+</div>
