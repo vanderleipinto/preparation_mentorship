@@ -3,7 +3,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
+    if params[:search_number].present?
+      @accounts = Account.where("account_number LIKE ?","%#{params[:search_number]}%")      
+    else
+      @accounts = Account.all
+    end
   end
 
   # GET /accounts/1 or /accounts/1.json
