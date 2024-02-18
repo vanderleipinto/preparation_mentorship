@@ -38,3 +38,16 @@ Validate
 CNPJ in Supplier
 ISBN in Book
 CPF in Author
+
+
+Release V0.4
+
+Battle 5 Report
+
+> Add
+- Value field in Part
+
+>Report
+- Author (with all the information) with his Books (with all the information) and the total number of books published
+- Supplier (with all information) with all authors (with all information) and books (with all information)
+- Book with the assembly (with all the information), with its parts (with all the information), the total number of parts and the total cost of the assembly.
