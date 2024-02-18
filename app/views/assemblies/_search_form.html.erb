@@ -1,0 +1,12 @@
+<div>
+  <%= form_tag(assemblies_path, method: :get) do %>
+  <label for="search_title">Name:</label>
+  <%= text_field_tag(:search_assembly) %> 
+  
+  <label for="search_title">Part:</label>
+  <%= text_field_tag(:search_part) %> 
+  
+
+    <%= submit_tag("Search Assembly(ies)") %>
+  <% end %>
+</div> 

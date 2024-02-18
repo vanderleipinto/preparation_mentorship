@@ -3,5 +3,19 @@
     <strong>Name:</strong>
     <%= assembly.name %>
   </p>
+  
+    <strong>Parts:</strong>
+    <%if assembly.parts.any?%>
+      <ul>
+        <% assembly.parts.each do |part| %>
+        <div>
+          <li><%=part.name%></li>
+        </div>
+        <%end%>
+      </ul>
+    </p>
+    <%else%>
+      <p>This assembly has no parts.</p>
+    <%end%>
 
 </div>
