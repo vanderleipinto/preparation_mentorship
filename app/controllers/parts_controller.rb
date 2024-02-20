@@ -21,7 +21,11 @@ class PartsController < ApplicationController
 
   # POST /parts or /parts.json
   def create
-    @part = Part.new(part_params)
+    params = part_params
+    #Change the ',' into '.' in params[:value], otherwise the database would receive only the int number.
+    params[:value].sub!(",", ".")
+    
+    @part = Part.new(params)
 
     respond_to do |format|
       if @part.save
@@ -36,8 +40,11 @@ class PartsController < ApplicationController
 
   # PATCH/PUT /parts/1 or /parts/1.json
   def update
+    params = part_params
+    #Chancge the ',' into '.' in params[:value], otherwise the database would receive only the int number.
+    params[:value].sub!(",", ".")
     respond_to do |format|
-      if @part.update(part_params)
+      if @part.update(params)
         format.html { redirect_to part_url(@part), notice: "Part was successfully updated." }
         format.json { render :show, status: :ok, location: @part }
       else
@@ -65,6 +72,6 @@ class PartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def part_params
-      params.require(:part).permit(:name, :supplier_id)
+      params.require(:part).permit(:name, :supplier_id, :value)
     end
 end
