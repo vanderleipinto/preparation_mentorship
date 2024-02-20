@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_action :set_author, only: %i[ show edit update destroy ]
+  before_action :set_author, only: %i[ show edit update destroy report ]
 
   # GET /authors or /authors.json
   def index
@@ -17,6 +17,11 @@ class AuthorsController < ApplicationController
 
   # GET /authors/1/edit
   def edit
+  end
+
+  # GET /authors/1/report
+  def report
+    @books = @author.books
   end
 
   # POST /authors or /authors.json
