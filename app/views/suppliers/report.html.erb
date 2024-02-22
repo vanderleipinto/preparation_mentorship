@@ -50,15 +50,16 @@
           
           <td>
             <ul>
-              
-              <% if @books.any? %>
-                <% @books.each do |book| %>
-                  <li><%= book.title %></li>
-                <% end %>                
+              <% books = Book.joins(assemblies: :parts).where(parts: { id: part.id }).distinct %>
+              <% if books.any? %>
+                <% books.each do |book| %>
+                  <% author = book.author %>
+                  <li><%= "#{book.title} (by #{author.name})" %></li>
+                <% end %>
               <% else %>
-                <li> <em>No books</em> </li>
+                <li><em>No books</em></li>
               <% end %>
-              </ul>
+            </ul>
           </td>
           <td>
             <ul>
