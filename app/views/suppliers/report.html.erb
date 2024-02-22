@@ -1,0 +1,81 @@
+<style>
+  table, th, td {
+    border:1px solid black;
+  }
+</style>
+
+
+<h1>Report</h1>
+
+<h2><%=@supplier.name%></h2>
+<div>
+  <strong> CNPJ: <%=@supplier.cnpj%></strong>
+</div>
+
+<div>
+  <strong>Parts:</strong>
+  <strong>Total: <%= @supplier.parts.count %></strong>
+</div>
+
+<table border="1" style="width:80%">
+  
+    <thead>
+      <tr>
+        <th>Parts</th>
+        <th>Value</th>
+        <th>Assemblies</th>        
+        <th>Books</th>
+        <th>Authors</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @supplier.parts.each do |part| %>
+        <tr>
+          <td><%= link_to part.name, part %></td>
+          <td>
+            <%= part.value %>
+          </td>
+          <td>
+            <ul>
+              <% assemblies = part.assemblies %>
+              <% if assemblies.any? %>
+                <% assemblies.each do |assembly| %>
+                  <li><%= assembly.name %></li>
+                <% end %>                
+              <% else %>
+                <li> <em>No Assemblies</em> </li>
+              <% end %>
+              </ul>
+          </td>
+          
+          <td>
+            <ul>
+              
+              <% if @books.any? %>
+                <% @books.each do |book| %>
+                  <li><%= book.title %></li>
+                <% end %>                
+              <% else %>
+                <li> <em>No books</em> </li>
+              <% end %>
+              </ul>
+          </td>
+          <td>
+            <ul>
+              <% authors = Author.joins(books: { assemblies: :parts }).where(parts: {id: part.id}).distinct %>
+              <% if authors.any? %>
+                <% authors.each do |author| %>
+                  <li><%= author.name %></li>
+                <% end %>
+              <%else%>
+                  <li> <em>No authors</em> </li>
+              <% end %>
+
+            </ul>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to "back", supplier_path %>
